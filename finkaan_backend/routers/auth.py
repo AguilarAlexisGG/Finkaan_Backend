@@ -32,7 +32,7 @@ def signup(
     response: Response,
     db: Session = Depends(get_db)
 ):
-    result = auth_service.register_user(body, db)
+    result = auth_service.register_user_2(body, db)
 
     # ⚡ Guardar sesión en Redis
     #redis_client.set(f"session:{result.user_id}", result.access_token, ex=3600)
