@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     APP_ENV: str = "development"
 
     # OAuth — Google
-    GOOGLE_CLIENT_ID: str = ""
-    GOOGLE_CLIENT_SECRET: str = "s"
+    GOOGLE_CLIENT_ID: str 
+    GOOGLE_CLIENT_SECRET: str 
 
     # IA — análisis conductual
     ANTHROPIC_API_KEY: str = ""

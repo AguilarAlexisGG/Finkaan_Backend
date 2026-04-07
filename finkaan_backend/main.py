@@ -11,7 +11,7 @@ from .config import settings
 
 from .database import engine, Base
 from .redis_client import ping as redis_ping
-from .routers import auth, users, scenarios, analysis
+from .routers import auth, users, scenarios, analysis, web
 
 
 # ─── Lifespan ─────────────────────────────────────────────────────────────────
@@ -55,6 +55,7 @@ app.include_router(auth.router)
 app.include_router(users.router)
 app.include_router(scenarios.router)
 app.include_router(analysis.router)
+app.include_router(web.router)
 
 
 # ─── Health check ─────────────────────────────────────────────────────────────

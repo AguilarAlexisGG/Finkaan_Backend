@@ -62,15 +62,17 @@ async def google_login(request: Request):
 
 @router.get("/callback/google", name="auth_callback")
 async def auth_callback(request: Request, db: Session = Depends(get_db)):
-    """Recibe la respuesta de Google y procesa el login"""
-    token = await oauth.google.authorize_access_token(request)
-    user_info = token.get('userinfo')
+    try:
+        """Recibe la respuesta de Google y procesa el login"""
+        token = await oauth.google.authorize_access_token(request)
+        user_info = token.get('userinfo')
 
-    if not user_info:
-        raise HTTPException(status_code=400, detail="No se pudo obtener informacion de Google")
+        if not user_info:
+            raise HTTPException(status_code=400, detail="No se pudo obtener informacion de Google")
 
-    return auth_service.authenticate_or_register_social_user("google", user_info, db)
-
+        return auth_service.authenticate_or_register_social_user("google", user_info, db)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Error en autenticación con Google: {str(e)}")
 
 @router.post("/google/mobile", response_model=schemas.TokenResponse)
 async def google_mobile_login(
