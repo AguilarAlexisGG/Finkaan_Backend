@@ -42,8 +42,8 @@ def signup(
         key="access_token",
         value=result.access_token,
         httponly=True,
-        secure=False,   # ⚠️ False en localhost
-        samesite="lax"
+        secure=True,   # ⚠️ False en localhost
+        samesite="none"
     )
 
     print(f'Registro: {result}')
